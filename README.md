@@ -39,7 +39,7 @@ Additional installed python packages, default are:
 Dependencies
 ------------
 
-None.
++ `juwai.common`
 
 Example Playbook
 ----------------
