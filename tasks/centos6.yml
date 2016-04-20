@@ -1,0 +1,47 @@
+---
+- name: ensure openssl-devel present
+  yum: name=openssl-devel state=present
+
+- name: download {{ executable_python }} source
+  get_url:
+    url: http://python.org/ftp/python/{{ py_version }}/Python-{{ py_version }}.tar.xz
+    dest: /tmp/Python-{{ py_version }}.tar.xz
+    timeout: 30
+  when: python_check|failed
+
+- name: unpack {{ executable_python }} source
+  unarchive:
+    src: /tmp/Python-{{ py_version }}.tar.xz
+    dest: /tmp
+    copy: no
+  when: python_check|failed
+
+- name: install {{ executable_python }} from source
+  shell: ./configure --prefix=/usr/local && make && make altinstall
+  args:
+    chdir: /tmp/Python-{{ py_version }}
+  when: python_check|failed
+
+- name: create symlink in /usr/bin
+  alternatives:
+    name: "{{ executable_python }}"
+    link: /usr/bin/{{ executable_python }}
+    path: /usr/local/bin/{{ executable_python }}
+  when: python_check|failed
+
+- name: download setuptools
+  get_url:
+    url: https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+    dest: /tmp/ez_setup.py
+    timeout: 30
+  when: easy_install_check|failed
+
+- name: install setuptools
+  command: /usr/bin/{{ executable_python }} ez_setup.py
+  args: { chdir: /tmp }
+  when: easy_install_check|failed
+
+- name: install pip
+  easy_install: name=pip executable={{ executable_easy_install }}
+  environment:
+    PATH: /usr/local/bin:/usr/bin:{{ ansible_env.PATH }}
