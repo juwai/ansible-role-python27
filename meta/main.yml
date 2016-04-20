@@ -3,7 +3,7 @@ galaxy_info:
   author: Juwai Limited
   description: Ansible role for Python 2.7
   company: Juwai Limited
-  license: MIT / BSD
+  license: MIT
   min_ansible_version: 2.0
 
   platforms:
