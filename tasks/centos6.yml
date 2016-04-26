@@ -37,7 +37,7 @@
   when: easy_install_check|failed
 
 - name: install setuptools
-  command: /usr/bin/{{ executable_python }} ez_setup.py
+  command: "/usr/bin/{{ executable_python }} ez_setup.py --version=19.6.2"
   args: { chdir: /tmp }
   when: easy_install_check|failed
 
