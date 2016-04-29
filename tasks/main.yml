@@ -1,6 +1,6 @@
 ---
 - name: try {{ executable_python }}
-  command: "{{ python }} --version"
+  command: "{{ executable_python }} --version"
   register: python_check
   ignore_errors: True
   changed_when: False
@@ -8,7 +8,7 @@
     PATH: /usr/local/bin:/usr/bin:{{ ansible_env.PATH }}
 
 - name: try {{ executable_easy_install }}
-  command: "{{ easy_install }} --version"
+  command: "{{ executable_easy_install }} --version"
   register: easy_install_check
   ignore_errors: True
   changed_when: False
