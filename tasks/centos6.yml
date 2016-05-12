@@ -31,7 +31,7 @@
 
 - name: download setuptools
   get_url:
-    url: https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+    url: https://bootstrap.pypa.io/ez_setup.py
     dest: /tmp/ez_setup.py
     timeout: 30
   when: easy_install_check|failed
