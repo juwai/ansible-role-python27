@@ -11,5 +11,3 @@
 /fyi: _@mention, @mention_: Please review.
 
 /cc: _@mention_: Need your input regarding _concern_.
-
-Thanks.
