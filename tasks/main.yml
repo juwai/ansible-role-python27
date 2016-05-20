@@ -15,15 +15,23 @@
   environment:
     PATH: /usr/local/bin:/usr/bin:{{ ansible_env.PATH }}
 
+- name: try {{ executable_pip }}
+  command: "{{ executable_pip }} --version"
+  register: pip_check
+  ignore_errors: True
+  changed_when: False
+  environment:
+    PATH: /usr/local/bin:/usr/bin:{{ ansible_env.PATH }}
+
 - include: aws.yml
   when:
     - ansible_distribution == 'Amazon'
-    - python_check|failed
+    - python_check|failed or easy_install_check|failed or pip_check|failed
 
 - include: centos6.yml
   when:
     - ansible_distribution != 'Amazon'
-    - python_check|failed or easy_install_check|failed
+    - python_check|failed or easy_install_check|failed or pip_check|failed
 
 - include: packages.yml
 - include: ve.yml

@@ -45,3 +45,4 @@
   easy_install: name=pip executable={{ executable_easy_install }}
   environment:
     PATH: /usr/local/bin:/usr/bin:{{ ansible_env.PATH }}
+  when: pip_check|failed
