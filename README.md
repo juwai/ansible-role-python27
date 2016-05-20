@@ -23,7 +23,7 @@ Python version, default is `2.7.9`.
 
 ### pip
 
-`pip` execuable name, default is `pip-2.7`.
+`pip` execuable name, default is `pip2.7`.
 
 ### python
 
