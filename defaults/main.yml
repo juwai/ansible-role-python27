@@ -3,7 +3,7 @@ py_version: 2.7.9 # same as AWS
 
 # executable names
 executable_easy_install: easy_install-2.7
-executable_pip: pip2.7
+executable_pip: pip-2.7
 executable_python: python2.7
 
 # additional packages
