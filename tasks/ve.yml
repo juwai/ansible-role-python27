@@ -1,6 +1,9 @@
 ---
 - name: install ve
-  get_url: url=https://git.io/ve dest=/usr/local/bin/ve mode=0755
+  get_url:
+    url: 'https://raw.githubusercontent.com/erning/ve/master/ve'
+    dest: '/usr/local/bin/ve'
+    mode: 0755
 
 - name: make ve available on path
   alternatives: name=ve link=/usr/bin/ve path=/usr/local/bin/ve
