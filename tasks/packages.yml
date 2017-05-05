@@ -1,6 +1,6 @@
 ---
 - name: install additional packages
   pip: name={{ item }} state=present executable={{ executable_pip }}
-  with_items: python_packages
+  with_items: "{{ python_packages }}"
   environment:
     PATH: /usr/local/bin:/usr/bin:{{ ansible_env.PATH }}
