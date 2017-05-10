@@ -1,4 +1,4 @@
 ---
 - name: install {{ executable_python }}
   yum: name={{ item }} state=present
-  with_items: amazon_python_packages
+  with_items: "{{ amazon_python_packages }}"
