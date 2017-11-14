@@ -39,4 +39,4 @@
 - name: install pip, setuptools, and wheel
   command: "/usr/bin/{{ executable_python }} get-pip.py"
   args: { chdir: /tmp }
-  when: pip_check|failed
+  when: easy_install_check|failed or pip_check|failed
