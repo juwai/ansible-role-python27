@@ -9,7 +9,6 @@ executable_python: python2.7
 # additional packages
 python_packages:
   - virtualenv
-  - wheel
 
 amazon_python_packages:
   - python27
