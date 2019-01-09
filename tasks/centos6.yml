@@ -2,8 +2,8 @@
 - name: ensure openssl-devel present
   yum: name=openssl-devel state=present
 
-- name: ensure openssl-devel present
-  yum: name=openssl-devel state=present
+- name: ensure sqlite-devel present
+  yum: name=sqlite-devel state=present
   when: env == 'vagrant'
 
 - name: download {{ executable_python }} source
