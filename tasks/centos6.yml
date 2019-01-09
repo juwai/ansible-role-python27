@@ -2,6 +2,10 @@
 - name: ensure openssl-devel present
   yum: name=openssl-devel state=present
 
+- name: ensure openssl-devel present
+  yum: name=openssl-devel state=present
+  when: env == 'vagrant'
+
 - name: download {{ executable_python }} source
   get_url:
     url: http://python.org/ftp/python/{{ py_version }}/Python-{{ py_version }}.tar.xz
