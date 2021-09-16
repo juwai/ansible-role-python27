@@ -1,0 +1,5 @@
+---
+- name: install {{ executable_python }}
+  yum:
+    name: '{{ python_packages_yum }}'
+    state: present

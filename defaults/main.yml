@@ -13,3 +13,6 @@ python_packages:
 amazon_python_packages:
   - python27
   - python27-pip
+python_packages_yum: '{{ amazon_python_packages }}'
+
+python_force_compile: false
