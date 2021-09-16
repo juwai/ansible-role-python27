@@ -1,11 +1,29 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+system("
+    if [ #{ARGV[0]} = 'up' ] || [ #{ARGV[0]} = 'provision' ]; then
+        ansible-galaxy install -f -p roles -r requirements.yml
+    fi
+")
+
 Vagrant.configure(2) do |config|
-  config.vm.box = "centos65"
-  config.vm.box_url = "http://downloads.juwai.xyz/devops/boxes/centos65-x86-64.box"
+  config.ssh.insert_key = false
+  config.ssh.forward_agent = true
+  config.ssh.host = 'localhost'
+  config.ssh.port = '2259'
+  config.ssh.private_key_path = '~/.vagrant.d/insecure_private_key'
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  config.vm.provider :docker do |docker|
+    docker.image = 'juwaicom/amazonlinux-vagrant:2.0'
+    docker.force_host_vm = false
+    docker.has_ssh = true
+    docker.ports = [
+        '2259:22',
+    ]
+  end
 
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
