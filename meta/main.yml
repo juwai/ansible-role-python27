@@ -1,24 +1,20 @@
 ---
 galaxy_info:
-  author: Juwai Limited
-  description: Ansible role for Python 2.7
-  company: Juwai Limited
+  role_name: python27
+  author: Juwai IQI
+  description: Ansible role for installing Python
+  company: Juwai IQI
   license: MIT
-  min_ansible_version: 2.0
-
+  min_ansible_version: 2.7
   platforms:
   - name: EL
     versions:
     - 6
-
-  # commented out amazon as 2015.09 is not recognized and causes
-  # validation errors on ansible galaxy
-  #
-  #- name: Amazon
-  #  versions:
-  #  - 2015.09
-
-  galaxy_tags: [amazon, centos6, python27]
+    - 7
+  - name: Amazon Linux 2
+    versions:
+    - any
+  galaxy_tags: [amazon, centos, python]
 
 dependencies:
   - juwai.common

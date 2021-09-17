@@ -6,4 +6,7 @@
     mode: 0755
 
 - name: make ve available on path
-  alternatives: name=ve link=/usr/bin/ve path=/usr/local/bin/ve
+  alternatives:
+    name: 've'
+    link: '/usr/bin/ve'
+    path: '/usr/local/bin/ve'

@@ -1,37 +1,37 @@
 ---
 - name: try {{ executable_python }}
-  command: "{{ executable_python }} --version"
+  command: '{{ executable_python }} --version'
   register: python_check
-  ignore_errors: True
-  changed_when: False
+  ignore_errors: true
+  changed_when: false
   environment:
-    PATH: /usr/local/bin:/usr/bin:{{ ansible_env.PATH }}
+    PATH: '/usr/local/bin:/usr/bin:{{ ansible_env.PATH }}'
 
 - name: try {{ executable_easy_install }}
-  command: "{{ executable_easy_install }} --version"
+  command: '{{ executable_easy_install }} --version'
   register: easy_install_check
-  ignore_errors: True
-  changed_when: False
+  ignore_errors: true
+  changed_when: false
   environment:
-    PATH: /usr/local/bin:/usr/bin:{{ ansible_env.PATH }}
+    PATH: '/usr/local/bin:/usr/bin:{{ ansible_env.PATH }}'
 
 - name: try {{ executable_pip }}
-  command: "{{ executable_pip }} --version"
+  command: '{{ executable_pip }} --version'
   register: pip_check
-  ignore_errors: True
-  changed_when: False
+  ignore_errors: true
+  changed_when: false
   environment:
-    PATH: /usr/local/bin:/usr/bin:{{ ansible_env.PATH }}
+    PATH: '/usr/local/bin:/usr/bin:{{ ansible_env.PATH }}'
 
-- include: aws.yml
+- include: yum.yml
   when:
-    - ansible_distribution == 'Amazon'
-    - python_check|failed or easy_install_check|failed or pip_check|failed
+    - ansible_distribution == 'Amazon' and not python_force_compile
+    - python_check is failed or easy_install_check is failed or pip_check is failed
 
-- include: centos6.yml
+- include: compile.yml
   when:
-    - ansible_distribution != 'Amazon'
-    - python_check|failed or easy_install_check|failed or pip_check|failed
+    - ansible_distribution != 'Amazon' or python_force_compile
+    - python_check is failed or easy_install_check is failed or pip_check is failed
 
 - include: packages.yml
 - include: ve.yml

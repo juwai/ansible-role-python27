@@ -1,0 +1,41 @@
+---
+- name: ensure openssl-devel present
+  yum:
+    name: 'openssl-devel'
+    state: present
+
+- name: download {{ executable_python }} source
+  get_url:
+    url: 'http://python.org/ftp/python/{{ py_version }}/Python-{{ py_version }}.tar.xz'
+    dest: '/tmp/Python-{{ py_version }}.tar.xz'
+    timeout: 30
+
+- name: unpack {{ executable_python }} source
+  unarchive:
+    src: '/tmp/Python-{{ py_version }}.tar.xz'
+    dest: '/tmp'
+    copy: no
+
+- name: install {{ executable_python }} from source
+  shell: './configure --prefix=/usr/local && make && make altinstall'
+  args:
+    chdir: '/tmp/Python-{{ py_version }}'
+    creates: '/usr/local/bin/{{ executable_python }}'
+
+- name: create python symlink in /usr/bin
+  alternatives:
+    name: '{{ executable_python }}'
+    link: '/usr/bin/{{ executable_python }}'
+    path: '/usr/local/bin/{{ executable_python }}'
+
+- name: create pip symlink in /usr/bin
+  alternatives:
+    name: '{{ executable_pip }}'
+    link: '/usr/bin/{{ executable_pip }}'
+    path: '/usr/local/bin/{{ executable_pip }}'
+
+- name: create easy_install symlink in /usr/bin
+  alternatives:
+    name: '{{ executable_easy_install }}'
+    link: '/usr/bin/{{ executable_easy_install }}'
+    path: '/usr/local/bin/{{ executable_easy_install }}'

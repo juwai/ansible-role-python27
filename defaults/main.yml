@@ -1,15 +1,18 @@
 ---
-py_version: 2.7.9 # same as AWS
+py_version: '2.7.9'
 
 # executable names
-executable_easy_install: easy_install-2.7
-executable_pip: pip2.7
-executable_python: python2.7
+executable_easy_install: 'easy_install-2.7'
+executable_pip: 'pip2.7'
+executable_python: 'python2.7'
 
 # additional packages
 python_packages:
-  - virtualenv
+  - 'virtualenv'
 
 amazon_python_packages:
-  - python27
-  - python27-pip
+  - 'python27'
+  - 'python27-pip'
+python_packages_yum: '{{ amazon_python_packages }}'
+
+python_force_compile: false
